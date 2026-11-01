@@ -11,6 +11,112 @@ RiskLens helps individuals and professionals discover, value, construct,
 optimise and monitor fixed-income portfolios (G-Secs, T-Bills, SDLs, NCDs,
 Bank FDs and Debt Mutual Funds).
 
+> 📄 A detailed project whitepaper is available at
+> [`docs/RiskLens_Whitepaper.pdf`](docs/RiskLens_Whitepaper.pdf).
+
+---
+
+## 1. Business idea
+
+India's fixed-income market is large, fast-growing and increasingly accessible
+to retail investors (RBI Retail Direct, online bond platforms, debt mutual
+funds). Yet the tools to **evaluate** these instruments remain fragmented,
+spreadsheet-driven and skewed toward institutions. RiskLens is a single,
+transparent intelligence layer that answers the question every bond investor
+actually has: *"Is the extra yield worth the risk — and how do I build and
+monitor a portfolio around it?"*
+
+The product is positioned as **analytics and decision-support** (not a broker,
+not an advisor): it ingests instrument, price, rating, liquidity and news data,
+runs institutional-grade fixed-income maths, and presents clear, auditable risk
+and income insights to two audiences — everyday investors and professionals.
+
+## 2. Problem statement
+
+Fixed-income investing in India is hard to do well because:
+
+- **Yield ≠ safety.** A higher coupon often hides credit, liquidity or
+  duration risk that retail tools never surface.
+- **Fragmented data.** Prices, ratings (CRISIL/ICRA/CARE/India Ratings),
+  secondary-market liquidity and issuer news live in separate silos.
+- **Liquidity is opaque.** Investors confuse large issue size with the ability
+  to actually sell; many bonds barely trade.
+- **Wrong maths.** Consumer tools average individual bond YTMs (incorrect),
+  apply bond formulas to FDs/mutual funds, or ignore duration/convexity/DV01.
+- **No portfolio view.** Little support for constraint-based construction,
+  cash-flow laddering, stress testing or downgrade-impact analysis.
+- **Reactive monitoring.** Investors learn about downgrades or liquidity
+  deterioration too late.
+
+## 3. Solution provided by this project
+
+RiskLens delivers an integrated platform built on a **correct, tested financial
+engine** and a transparent, "never fabricate data" philosophy:
+
+| Problem | RiskLens solution |
+|---------|-------------------|
+| Yield ≠ safety | Risk-adjusted view: duration, convexity, DV01, credit & liquidity scoring beside every yield |
+| Fragmented data | One model unifying instruments, prices, ratings, liquidity, news & issuers |
+| Opaque liquidity | Transparent 0–100 liquidity score (5 weighted components) + estimated liquidation days/cost |
+| Wrong maths | Cash-flow-weighted portfolio YTM (IRR), instrument-specific methods for FDs & funds |
+| No portfolio view | SciPy constrained optimiser, maturity ladder, stress testing, cash-flow calendar |
+| Reactive monitoring | Alerts for downgrades, negative outlooks, liquidity drops, concentration & maturities |
+
+**Core principle:** maximise income/yield *subject to transparent risk
+constraints* — and always disclose data sources, timestamps, assumptions and
+limitations. Nothing is presented as a guarantee.
+
+## 4. Who it is for
+
+- **Individual investors** — budget, horizon and income preferences in; a clear
+  proposed portfolio, expected income, maturity calendar and alerts out.
+- **Investment professionals** — detailed valuation, portfolio analytics,
+  rating migration, liquidity analytics, stress testing, data-quality console,
+  multi-portfolio management and Excel/PDF reporting.
+
+## 5. How it works (end to end)
+
+```
+            ┌─────────────────────────────────────────────────────────────┐
+  Data  ──▶ │ Instruments · Prices · Ratings · Liquidity · News (adapters) │
+            └───────────────┬─────────────────────────────────────────────┘
+                            ▼
+            ┌───────────────────────────────┐     ┌──────────────────────┐
+            │ Analytics engine (Python)     │◀───▶│ PostgreSQL (29 tables │
+            │ pricing·yield·duration·DV01·  │     │ NUMERIC precision)    │
+            │ liquidity·optimiser·stress    │     └──────────────────────┘
+            └───────────────┬───────────────┘
+                            ▼
+            ┌───────────────────────────────┐
+            │ FastAPI backend (JWT, REST)   │
+            └───────────────┬───────────────┘
+                            ▼
+            ┌───────────────────────────────┐
+            │ Next.js UI: dashboard·explore·│
+            │ builder·risk·liquidity·credit·│
+            │ news·cash-flows·alerts·reports│
+            └───────────────────────────────┘
+```
+
+A typical user journey:
+1. **Register / log in** (or use the demo account).
+2. **Explore instruments** — filter by category, see YTM, duration, rating and
+   a liquidity score for each.
+3. **Build a portfolio** — enter amount, objective and constraints (credit,
+   liquidity, duration, issuer/sector caps); the optimiser returns a compliant
+   allocation or explains why constraints conflict.
+4. **Review the dashboard** — value, gain/loss, cash-flow-weighted yield,
+   income, duration, DV01, allocations and a maturity ladder.
+5. **Analyse risk** — stress tests (±rate/spread shifts, downgrade, default,
+   liquidity), credit and liquidity breakdowns.
+6. **Plan cash flows** — an income/maturity calendar.
+7. **Monitor** — alerts on downgrades, negative outlooks and concentration.
+8. **Report** — export portfolio Excel/PDF.
+
+See the [end-to-end setup guide](#quick-start-local-no-docker) below and
+[`docs/`](docs) for architecture, methodology, data-provider and deployment
+details.
+
 ---
 
 ## Monorepo layout
