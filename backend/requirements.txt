@@ -1,0 +1,18 @@
+fastapi>=0.110
+uvicorn[standard]>=0.27
+pydantic>=2.6
+pydantic-settings>=2.2
+SQLAlchemy>=2.0
+psycopg[binary]>=3.1
+python-jose[cryptography]>=3.3
+bcrypt>=4.0
+python-multipart>=0.0.9
+email-validator>=2.1
+openpyxl>=3.1
+reportlab>=4.0
+numpy>=1.24
+scipy>=1.10
+pandas>=2.0
+httpx>=0.27
+pytest>=7.0
+# Local analytics engine (installed via: pip install -e ./analytics)

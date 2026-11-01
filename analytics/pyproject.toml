@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "risklens-analytics"
+version = "0.1.0"
+description = "RiskLens fixed-income analytics engine (pricing, yield, risk, liquidity, optimisation, stress testing)"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "pandas>=2.0",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7.0"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["risklens_analytics*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,30 @@
+# Secrets / env
+.env
+backend/.env
+frontend/.env.local
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+*.db
+risklens.db
+
+# Node / Next
+node_modules/
+frontend/.next/
+frontend/out/
+npm-debug.log*
+
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
+
+# Reports output
+reports/output/
+*.xlsx
+*.pdf
+!docs/**/*.pdf

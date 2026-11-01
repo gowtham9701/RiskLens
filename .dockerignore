@@ -1,0 +1,9 @@
+.venv
+**/__pycache__
+**/*.pyc
+.pytest_cache
+*.db
+.git
+frontend/node_modules
+frontend/.next
+.DS_Store
